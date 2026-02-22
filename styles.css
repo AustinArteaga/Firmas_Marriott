@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+form {
+    display: grid;
+    gap: 12px;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #5B2D8E;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #4a2473;
+}
+
+#previewSection {
+    margin-top: 40px;
+}
+
+#signaturePreview {
+    border: 1px solid #ddd;
+    padding: 20px;
+    background: #fff;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    overflow-x: auto;
+}
+
+#copyBtn {
+    width: 100%;
+    margin-top: 12px;
+    background-color: #28a745;
+}
+
+#copyBtn:hover {
+    background-color: #218838;
+}
+
+#copyMessage {
+    text-align: center;
+    color: #28a745;
+    font-weight: bold;
+    margin-top: 10px;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.visible {
+    opacity: 1 !important;
+}
+
+.hidden {
+    display: none;
+}

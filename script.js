@@ -6,58 +6,74 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyMessage = document.getElementById('copyMessage');
 
     const template = `
-<table cellpadding="0" cellspacing="0" border="0" width="900" style="width:900px; font-family:'DM Sans', 'DM Sans Bold', Arial, sans-serif; border-collapse:collapse;">
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<table cellpadding="0" cellspacing="0" border="0" width="500" style="width:500px; font-family:'DM Sans', Arial, sans-serif; border-collapse:collapse;">
+  
+  <!-- IMAGEN -->
   <tr>
-    <!-- IMAGEN -->
-    <td width="600" style="width:600px; vertical-align:top; padding:0;">
-      <img src="https://github.com/marriottit/ImagenesFirma/blob/main/firma%20(1).png?raw=true"
-           width="600"
-           style="display:block; width:600px; height:auto; border:0;"
+    <td style="padding:0;">
+      <img src="https://github.com/marriottit/ImagenesFirma/blob/main/firma.png?raw=true"
+           width="500"
+           style="display:block; width:480px; height:auto; border:0;"
            alt="Grupo Marriott - 91 años">
     </td>
+  </tr>
 
-    <!-- DATOS -->
-    <td width="300" style="width:300px; padding-left:16px; vertical-align:top;">
+  <!-- DATOS -->
+  <tr>
+    <td style="padding-top:10px; vertical-align:top;">
       
-      <!-- Nombre -->
-      <p style="margin:0 0 2px 0; font-size:10pt; font-weight:700; color:#5B2D8E;">
-        {name}
+      <!-- Nombre: DM Sans Bold -->
+      <p style="margin:0 0 2px 0; font-size:12pt; font-weight:700; font-family:'DM Sans', Arial, sans-serif; color:#5b2d8e;"><br><br>
+        %%Displayname%%
       </p>
 
-      <!-- Cargo -->
-      <p style="margin:0 0 8px 0; font-size:8pt; color:#5B2D8E;">
-        {title}
+      <!-- Cargo: DM Sans Regular -->
+      <p style="margin:0 0 2px 0; font-size:10pt; font-weight:400; font-family:'DM Sans', Arial, sans-serif; color:#5B2D8E;">
+        %%Title%%
       </p>
 
       <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; font-family:'DM Sans', Arial, sans-serif;">
         <tr>
-          <td width="170" style="font-size:8pt; font-weight:400; color:#5B2D8E; font-family:'DM Sans', Arial, sans-serif; padding:0; margin:0; line-height:10pt; mso-line-height-rule:exactly;">
+          <!-- Dirección: DM Sans Regular -->
+          <td width="170" style="font-size:10pt; font-weight:400; font-family:'DM Sans', Arial, sans-serif; color:#5B2D8E; padding:0; margin:0; line-height:10pt;">
             Km 12.5 vía Salitre
           </td>
-          <td width="130" style="font-size:8pt; color:#5B2D8E; padding:0; margin:0; line-height:10pt; mso-line-height-rule:exactly;">
-            {phone}
+          <!-- Teléfono: DM Sans Regular -->
+          <td width="130" style="font-size:10pt; font-weight:400; font-family:'DM Sans', Arial, sans-serif; color:#5B2D8E; padding:0; margin:0; line-height:10pt;">
+            %%Phone%%
           </td>
         </tr>
 
         <tr>
-          <td width="170" style="font-size:8pt; font-weight:400; color:#5B2D8E; font-family:'DM Sans', Arial, sans-serif; padding:0; margin:0; line-height:10pt; mso-line-height-rule:exactly;">
+          <!-- Ciudad: DM Sans Regular -->
+          <td width="170" style="font-size:10pt; font-weight:400; font-family:'DM Sans', Arial, sans-serif; color:#5B2D8E; padding:0; margin:0; line-height:10pt;">
             Guayas – Ecuador
           </td>
-          <td width="130" style="font-size:8pt; color:#5B2D8E; padding:0; margin:0; line-height:10pt; mso-line-height-rule:exactly;">
-            {email}
+          <!-- Correo: DM Sans Regular -->
+          <td width="180" style="font-size:10pt; font-weight:400; font-family:'DM Sans', Arial, sans-serif; color:#5B2D8E; padding:0; margin:0; line-height:10pt;">
+            %%Email%%
+          </td>
+          <!-- Web: DM Sans Bold -->
+          <td width="130" style="font-size:10pt; font-family:'DM Sans', Arial, sans-serif; color:#5B2D8E; padding:0; margin:0; line-height:10pt;">
+            <a href="https://grupomarriott.com" style="color:#5B2D8E; text-decoration:none; font-family:'DM Sans', Arial, sans-serif;">
+              <span style="font-weight:700;">grupomarriott</span><span style="font-weight:400;">.com</span>
+            </a>
           </td>
         </tr>
 
-        <tr>
-          <td colspan="2" style="padding-top:4px; font-size:8pt; font-weight:700; color:#5B2D8E;">
-            grupomarriott.com
-          </td>
-        </tr>
       </table>
 
     </td>
   </tr>
+
 </table>
+</body>
+</html>
     `;
 
     let currentSignatureHTML = '';
@@ -112,4 +128,5 @@ document.addEventListener('DOMContentLoaded', () => {
         selection.removeAllRanges();
         document.body.removeChild(tempDiv);
     });
+
 });

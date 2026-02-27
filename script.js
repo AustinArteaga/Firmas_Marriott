@@ -29,12 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
       
       <!-- Nombre: DM Sans Bold -->
       <p style="margin:0 0 2px 0; font-size:12pt; font-weight:700; font-family:'DM Sans', Arial, sans-serif; color:#5b2d8e;"><br><br>
-        %%Displayname%%
+        {name}
       </p>
 
       <!-- Cargo: DM Sans Regular -->
       <p style="margin:0 0 2px 0; font-size:10pt; font-weight:400; font-family:'DM Sans', Arial, sans-serif; color:#5B2D8E;">
-        %%Title%%
+        {title}
       </p>
 
       <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; font-family:'DM Sans', Arial, sans-serif;">
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </td>
           <!-- Teléfono: DM Sans Regular -->
           <td width="130" style="font-size:10pt; font-weight:400; font-family:'DM Sans', Arial, sans-serif; color:#5B2D8E; padding:0; margin:0; line-height:10pt;">
-            %%Phone%%
+            {phone}
           </td>
         </tr>
 
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </td>
           <!-- Correo: DM Sans Regular -->
           <td width="180" style="font-size:10pt; font-weight:400; font-family:'DM Sans', Arial, sans-serif; color:#5B2D8E; padding:0; margin:0; line-height:10pt;">
-            %%Email%%
+            {email}
           </td>
           <!-- Web: DM Sans Bold -->
           <td width="130" style="font-size:10pt; font-family:'DM Sans', Arial, sans-serif; color:#5B2D8E; padding:0; margin:0; line-height:10pt;">
@@ -128,5 +128,4 @@ document.addEventListener('DOMContentLoaded', () => {
         selection.removeAllRanges();
         document.body.removeChild(tempDiv);
     });
-
 });

@@ -6,12 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyMessage = document.getElementById('copyMessage');
 
     const template = `
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-<body>
-<table cellpadding="0" cellspacing="0" border="0" width="500" style="width:500px; font-family:'DM Sans', Arial, sans-serif; border-collapse:collapse;">
+<table cellpadding="0" cellspacing="0" border="0" width="500" style="width:500px; font-family:'DM Sans', Arial, sans-serif; border-collapse:collapse; background:transparent;">
   
   <!-- IMAGEN -->
   <tr>
@@ -72,8 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
   </tr>
 
 </table>
-</body>
-</html>
     `;
 
     let currentSignatureHTML = '';
@@ -99,33 +92,40 @@ document.addEventListener('DOMContentLoaded', () => {
         previewSection.classList.remove('hidden');
     });
 
-    copyBtn.addEventListener('click', () => {
+    copyBtn.addEventListener('click', async () => {
         if (!currentSignatureHTML) {
             alert('Primero genera la firma.');
             return;
         }
 
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = currentSignatureHTML;
-        document.body.appendChild(tempDiv);
-
-        const range = document.createRange();
-        range.selectNodeContents(tempDiv);
-        const selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(range);
+        // Envolvemos la firma en un HTML limpio, sin estilos de fondo
+        const cleanHTML = `<!DOCTYPE html><html><head></head><body style="margin:0;padding:0;background:transparent;">${currentSignatureHTML}</body></html>`;
 
         try {
-            document.execCommand('copy');
+            // Método moderno: copia HTML limpio sin arrastrar estilos de la página
+            const htmlBlob = new Blob([cleanHTML], { type: 'text/html' });
+            const textBlob = new Blob([signaturePreview.innerText], { type: 'text/plain' });
+            await navigator.clipboard.write([
+                new ClipboardItem({ 'text/html': htmlBlob, 'text/plain': textBlob })
+            ]);
             copyMessage.classList.add('visible');
-            setTimeout(() => {
-                copyMessage.classList.remove('visible');
-            }, 3000);
-        } catch (err) {
-            alert('No se pudo copiar automáticamente.\nSelecciona la firma en la vista previa y usa Ctrl+C.');
-        }
+            setTimeout(() => copyMessage.classList.remove('visible'), 3000);
 
-        selection.removeAllRanges();
-        document.body.removeChild(tempDiv);
+        } catch (err) {
+            // Fallback: selección manual
+            const range = document.createRange();
+            range.selectNodeContents(signaturePreview);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyMessage.classList.add('visible');
+                setTimeout(() => copyMessage.classList.remove('visible'), 3000);
+            } catch (err2) {
+                alert('No se pudo copiar automáticamente.\nSelecciona la firma en la vista previa y usa Ctrl+C.');
+            }
+            selection.removeAllRanges();
+        }
     });
 });

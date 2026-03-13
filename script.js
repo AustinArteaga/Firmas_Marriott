@@ -7,21 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const template = `
 <table cellpadding="0" cellspacing="0" border="0" width="500" style="width:500px; font-family:'DM Sans', Arial, sans-serif; border-collapse:collapse; background:transparent;">
-  
-  <!-- IMAGEN -->
-  <tr>
-    <td style="padding:0;">
-      <img src="https://github.com/marriottit/ImagenesFirma/blob/main/firma.png?raw=true"
-           width="500"
-           style="display:block; width:480px; height:auto; border:0;"
-           alt="Grupo Marriott - 91 años">
-    </td>
-  </tr>
 
   <!-- DATOS -->
   <tr>
     <td style="padding-top:10px; vertical-align:top;">
-      
+
       <!-- Nombre: DM Sans Bold -->
       <p style="margin:0 0 2px 0; font-size:12pt; font-weight:700; font-family:'DM Sans', Arial, sans-serif; color:#5b2d8e;"><br><br>
         {name}
@@ -31,12 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
       <p style="margin:0 0 2px 0; font-size:10pt; font-weight:400; font-family:'DM Sans', Arial, sans-serif; color:#5B2D8E;">
         {title}
       </p>
-
+<br>
       <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; font-family:'DM Sans', Arial, sans-serif;">
         <tr>
           <!-- Dirección: DM Sans Regular -->
           <td width="170" style="font-size:10pt; font-weight:400; font-family:'DM Sans', Arial, sans-serif; color:#5B2D8E; padding:0; margin:0; line-height:10pt;">
-            Km 12.5 vía Salitre
+            {address}
           </td>
           <!-- Teléfono: DM Sans Regular -->
           <td width="130" style="font-size:10pt; font-weight:400; font-family:'DM Sans', Arial, sans-serif; color:#5B2D8E; padding:0; margin:0; line-height:10pt;">
@@ -47,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <tr>
           <!-- Ciudad: DM Sans Regular -->
           <td width="170" style="font-size:10pt; font-weight:400; font-family:'DM Sans', Arial, sans-serif; color:#5B2D8E; padding:0; margin:0; line-height:10pt;">
-            Guayas – Ecuador
+            {region}
           </td>
           <!-- Correo: DM Sans Regular -->
           <td width="180" style="font-size:10pt; font-weight:400; font-family:'DM Sans', Arial, sans-serif; color:#5B2D8E; padding:0; margin:0; line-height:10pt;">
@@ -66,27 +56,55 @@ document.addEventListener('DOMContentLoaded', () => {
     </td>
   </tr>
 
+  <!-- IMAGEN -->
+  <tr>
+    <td style="padding:0;">
+      <br><br>
+      <img src="https://almacenesmarriott.com/wp-content/uploads/2026/03/firma-2-1.png"
+           width="367"
+           height="auto"
+           style="display:block; width:367px; max-width:367px; height:auto; border:0;"
+           alt="Grupo Marriott - 91 años">
+    </td>
+  </tr>
+
 </table>
     `;
+
+    const cityData = {
+        guayaquil: {
+            address: 'Km 12.5 vía Salitre',
+            region:  'Guayas – Ecuador'
+        },
+        quito: {
+            address: 'América N37-213 y Villalengua',
+            region:  'Quito – Ecuador'
+        }
+    };
 
     let currentSignatureHTML = '';
 
     generateBtn.addEventListener('click', () => {
-        const name = document.getElementById('name').value.trim();
+        const name  = document.getElementById('name').value.trim();
         const title = document.getElementById('title').value.trim();
         const phone = document.getElementById('phone').value.trim();
         const email = document.getElementById('email').value.trim();
+        const city  = document.getElementById('city').value;
 
         if (!name || !title || !phone || !email) {
             alert('Por favor completa todos los campos.');
             return;
         }
 
+        const { address, region } = cityData[city];
+
         currentSignatureHTML = template
-            .replace('{name}', name)
-            .replace('{title}', title)
-            .replace('{phone}', phone)
-            .replace('{email}', email);
+            .replace('{name}',    name)
+            .replace('{title}',   title)
+            .replace('{phone}',   phone)
+            .replace('{email}',   email)
+            .replace('{address}', address)
+            .replace('{region}',  region);
 
         signaturePreview.innerHTML = currentSignatureHTML;
         previewSection.classList.remove('hidden');
